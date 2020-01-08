@@ -2,7 +2,7 @@
 require('vendor/autoload.php');
 use oldspice\Navigation;
 use oldspice\Account;
-$navigation =Navigation::getNavigation();
+
 
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $email = $_POST['email'];
@@ -17,6 +17,7 @@ else{
     $register ='';
     $email = '';
 }
+$navigation =Navigation::getNavigation();
 
 //Twig
 $loader = new Twig_Loader_Filesystem('templates');
