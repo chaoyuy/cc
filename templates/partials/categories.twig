@@ -1,6 +1,8 @@
-<nav class=" nav flex-column">
+<nav class=" nav  nav-pills flex-column">
+<a href="index.php" class="nav-link"> ALL categories</a>
 {% for  category  in categories.items %}
-<a href="index.php?category_id={{category.category_id}}" class= "nav-link">
+{% set active = (categories.active == category.category_id)  ?  'active' : ' '  %}
+<a href="index.php?category_id={{category.category_id}}" class= "nav-link {{active}}">
 {{category.category_name}}
 </a>
 {% endfor %}
