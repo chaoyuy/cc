@@ -5,7 +5,12 @@
   {% include 'partials/navigation.twig' %}
     <div class="container">
       <div class="row">
-        {% for item in products %}
+      <div class="col-md-2"></div>
+      {% include 'partials/categories.twig' %}
+      </div>
+      <div class="col-md-10">
+      <div class="row">
+      {% for item in products %}
           <div class="col-md-3">
             <h4 class ="text-capitalize" style="min-height:4rem">{{item.name}}</h4>
             <a href="detail.php?product_id={{item.product_id}}">
@@ -15,6 +20,8 @@
             <p>{{item.description  |  slice(0,100)  ~ '...' }}</p>
           </div>
         {% endfor %}
+      </div>
+      </div>
       </div>
     </div>
 {% include  'partials/footer.twig' %}
