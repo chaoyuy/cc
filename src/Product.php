@@ -11,23 +11,26 @@ class Product extends Database {
 
   public function getProducts() {
     $query = "
-    SELECT 
+    SELECT
     @pid := product.product_id as product_id,
     name,
     description,
     price,
-    (SELECT @image_id :=image_id FROM product_image WHERE product_id =@pid LIMIT 1) as image_id,
-    (SELECT image_file_name FROM image WHERE image_id = @image_id) as image
+    ( SELECT @img_id := image_id FROM product_image WHERE product_id = @pid LIMIT 1 ) as image_id,
+    ( SELECT image_file_name FROM image WHERE image_id = @img_id ) as image
     FROM product
-   
     ";
+
     if( isset($_GET['category_id']) ) {
       $query = $query . " INNER JOIN product_category ON product_category.product_id = product.product_id ";
     }
+
     $query = $query . " WHERE product.active = 1 ";
-    if( isset($_GET['category_id']) )  {
-      $query = $query . " AND  Product_category.category_id =  ? ";
+
+    if( isset($_GET['category_id']) ) {
+      $query = $query . " AND product_category.category_id = ? ";
     }
+
     try{
       $statement = $this -> connection -> prepare( $query );
       if( isset($_GET['category_id'] ) ) {
@@ -47,11 +50,9 @@ class Product extends Database {
     // loop through result and add to array
     while( $row = $result -> fetch_assoc() ) {
       array_push( $items, $row );
-
     }
-    $products['total'] = count(  $items );
+    $products['total'] = count( $items );
     $products['items'] = $items;
-
     
     return $products;
   }

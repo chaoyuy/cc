@@ -3,6 +3,8 @@ require('vendor/autoload.php');
 use oldspice\Navigation;
 use oldspice\Product;
 use oldspice\Category;
+use oldspice\Contact;
+
 $navigation =Navigation::getNavigation();
 $p = new Product();
 $products = $p -> getProducts();
